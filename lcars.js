@@ -30,3 +30,22 @@ function myFunction(imgs) {
   // Show the container element (hidden with CSS)
   expandImg.parentElement.style.display = "block";
 }
+
+const apiKey = '0a28e6d800b1c3a72d2fc921f2d7eabb';
+const userId = '188959913@N07';
+
+fetch(`https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1`)
+  .then(response => response.json())
+  .then(data => {
+    const albums = data.photosets.photoset;
+    const albumsContainer = document.getElementById('albums');
+    
+    albums.forEach(album => {
+      const albumItem = document.createElement('li');
+      albumItem.innerHTML = `<a href="#" data-album-id="${album.id}">${album.title._content}</a>`;
+      albumsContainer.appendChild(albumItem);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching Flickr albums:', error);
+  });
