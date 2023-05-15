@@ -32,7 +32,7 @@ function myFunction(imgs) {
 }
 
 const apiKey = '0a28e6d800b1c3a72d2fc921f2d7eabb';
-const userId = 'Strormer';
+const userId = '188959913@N07';
 
 fetch(`https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1`)
   .then(response => response.json())
