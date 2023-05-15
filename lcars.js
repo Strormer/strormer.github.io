@@ -49,3 +49,25 @@ fetch(`https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api
   .catch(error => {
     console.error('Error fetching Flickr albums:', error);
   });
+
+// Add this code after populating the album list (step 2)
+
+// Event listener for album click
+const albumList = document.getElementById('albums');
+albumList.addEventListener('click', event => {
+  event.preventDefault();
+  const target = event.target;
+  
+  if (target.tagName === 'A') {
+    const albumId = target.getAttribute('data-album-id');
+    openGallery(albumId);
+  }
+});
+
+// Function to open the gallery
+function openGallery(albumId) {
+  // Implement your gallery opening logic here
+  // You can create a new page or modal to display the images from the selected album
+  // Use the provided albumId to fetch the respective images using the Flickr API, similar to the previous code example
+  // Once you have the images, display them in the gallery view as desired
+}
