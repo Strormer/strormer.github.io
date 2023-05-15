@@ -66,8 +66,37 @@ albumList.addEventListener('click', event => {
 
 // Function to open the gallery
 function openGallery(albumId) {
-  // Implement your gallery opening logic here
-  // You can create a new page or modal to display the images from the selected album
-  // Use the provided albumId to fetch the respective images using the Flickr API, similar to the previous code example
-  // Once you have the images, display them in the gallery view as desired
+  const apiKey = '0a28e6d800b1c3a72d2fc921f2d7eabb';
+
+  fetch(`https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${apiKey}&photoset_id=${albumId}&format=json&nojsoncallback=1`)
+    .then(response => response.json())
+    .then(data => {
+      const photos = data.photoset.photo;
+      const galleryContainer = document.getElementById('gallery');
+      const expandedImgContainer = document.getElementById('expandedImgContainer');
+
+      // Clear existing gallery content
+      galleryContainer.innerHTML = '';
+
+      // Create and append gallery images
+      photos.forEach(photo => {
+        const photoUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+
+        const galleryImg = document.createElement('img');
+        galleryImg.src = photoUrl;
+        galleryImg.alt = photo.title;
+
+        galleryImg.addEventListener('click', function() {
+          myFunction(this);
+        });
+
+        galleryContainer.appendChild(galleryImg);
+      });
+
+      // Display the gallery
+      expandedImgContainer.style.display = 'block';
+    })
+    .catch(error => {
+      console.error('Error fetching Flickr photos:', error);
+    });
 }
