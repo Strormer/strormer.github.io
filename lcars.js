@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 });
 
+// Below here lies additional code I've appended into this js file for Luna Shipyards
 function myFunction(imgs) {
   // Get the expanded image
   var expandImg = document.getElementById("expandedImg");
